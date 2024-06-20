@@ -57,12 +57,7 @@ func (p *ethParser) rpcRequest(method string, params []any, response any) error 
 }
 
 func (p *ethParser) GetCurrentBlock() int {
-	var result RpcResp[string]
-	err := p.rpcRequest("eth_blockNumber", []any{"latest"}, &result)
-	if err != nil {
-		return -1
-	}
-	return HexToDec(result.Result)
+	return p.lastSyncedBlock
 }
 
 func (p *ethParser) Subscribe(address string) bool {
